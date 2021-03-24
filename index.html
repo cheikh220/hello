@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>ehealth</title>
+ <style>
+   .fiel{
+    width: 500px;
+}
+
+label{
+    display: inline-block;
+    min-width: 100px;
+}
+
+input{
+    display: inline-block;
+    min-width: 100px;
+    margin: 10px 0;
+}
+
+.valider{
+    margin-left: 150px;
+}
+ </style>
+</head>
+<body>
+    <form method="POST" action="/addname">
+      <fieldset class="fiel">
+        <legend>nouveau patient</legend><br>
+
+        <label for="nom">nom</label>
+        <input id="nom" name="nom" type="text" placeholder="Fall" required maxlength="20">
+        <span id="nom-manquant"></span><br>
+
+        <label for="prenom">prenom</label>
+        <input name="prenom" id="prenom" type="text" placeholder="Malickh" required maxlength="20">
+        <span id="prenom-manquant"></span><br>
+
+        <label for="maissance">naissance</label>
+        <input id="naisance" name="naissance" type="date" required><br>
+
+        <input type="submit" value="ENREGISTRER" id="valider">
+
+      </fieldset>  
+      <script>
+        var valider = document.getElementById("valider");
+var nom = document.getElementById('nom');
+var nom_m = document.getElementById('nom-manquant');
+var nom_v = /^[a-zA-Zéè][a-zA-Zéèçà]+/;
+var prenom = document.getElementById('prenom');
+var prenom_m = document.getElementById('prenom-manquant')
+var prenom_v = /^[a-zA-Zéè][a-zA-Zéèçà]+([-'\s]^[a-zA-Zéè][a-zA-Zéèçà]+)?/;
+valider.addEventListener('click', f_valid);
+
+function f_valid(e){
+    if (nom.validity.valueMissing) {
+        e.preventDefault();
+        nom_m.textContent = 'Nom manquant';
+        nom_m.style.color = 'red';
+    }else if(nom_v.test(nom.value) == false){
+        event.preventDefault();
+        nom_m.textContent = "Format incorret";
+        nom_m.style.color = "orange"
+    }
+    else if (prenom.validity.valueMissing) {
+        e.preventDefault();
+        prenom_m.textContent = 'Prenom manquant';
+        prenom_m.style.color = 'red';
+    }else if (prenom_v.test(prenom.value) == false){
+        event.preventDefault();
+        prenom_m.textContent = "Format incorret";
+        prenom_m.style.color = "orange"
+    }
+    else{
+        
+    }
+}
+      </script>
+    </form>
+</body>
+</html>
